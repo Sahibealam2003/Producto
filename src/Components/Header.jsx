@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from './NavBar';
+import React from "react";
+import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Header = ({ query, setQuery }) => {
   return (

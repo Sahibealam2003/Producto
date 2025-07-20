@@ -16,7 +16,7 @@ const SearchPage = () => {
     <div className="px-6 py-4">
       <h1 className="text-xl font-semibold mb-4">
         Search Results for:{" "}
-        <span className="text-[#f94e30]">"{query || '...'}"</span>
+        <span className="text-[#f94e30]">"{query || "..."}"</span>
       </h1>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

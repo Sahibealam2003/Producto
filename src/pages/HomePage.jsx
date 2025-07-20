@@ -1,20 +1,53 @@
 import React from "react";
 import { useApi } from "../Utils/ApiContex";
-import Footer from '../Components/Footer';
+import Footer from "../Components/Footer";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
+import slider1 from "../assets/slider_img_1.jpg";
+import slider2 from "../assets/slider_img_2.jpg";
 
 const HomePage = ({ query }) => {
+  const products = [{ image: slider1 }, { image: slider2 }];
   const navigate = useNavigate();
   const { apiData } = useApi();
 
   const searchText = query.toLowerCase();
-  const filteredData = apiData.filter(item =>
+  const filteredData = apiData.filter((item) =>
     item.title.toLowerCase().includes(searchText)
   );
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      <div className="mt-5 border-b border-gray-300 shadow-2xs pb-5 ">
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar]}
+          direction="horizontal"
+          loop={true}
+          pagination={{ clickable: true }}
+          navigation
+          className="w-[90%]  mx-auto "
+        >
+          {products.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className=" w-[100%] flex items-center justify-center  ">
+                <img
+                  src={item.image}
+                  alt={`Slide ${index + 1}`}
+                  className="w-[100%]  h-[250px]"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="w-[90%] mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {filteredData.length === 0 ? (
           <p className="text-gray-600 col-span-full text-center text-lg">
             No products found for "{query}"
@@ -35,17 +68,46 @@ const HomePage = ({ query }) => {
                 <p className="absolute top-2 left-3 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
                   {Math.round(item.discountPercentage)}% OFF
                 </p>
-                <div className="absolute top-2 right-5 flex items-center gap-1">
-                  <span className="text-sm font-medium text-white bg-[#f94e30] px-1.5 py-0.5 rounded">
-                    {item.rating}
-                  </span>
+                <div className="absolute top-2 right-5 flex items-center gap-1 bg-[#f94e30] text-white px-2 py-1 rounded shadow-sm">
+                  {/* Star Icon */}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <circle cx="10" cy="10" r="9" fill="url(#ratingGradient)" />
+                    <path
+                      d="M10.0816 12.865C10.0312 12.8353 9.96876 12.8353 9.91839 12.865L7.31647 14.3968C6.93482 14.6214 6.47106 14.2757 6.57745 13.8458L7.27568 11.0245C7.29055 10.9644 7.26965 10.9012 7.22195 10.8618L4.95521 8.99028C4.60833 8.70388 4.78653 8.14085 5.23502 8.10619L8.23448 7.87442C8.29403 7.86982 8.34612 7.83261 8.36979 7.77777L9.54092 5.06385C9.71462 4.66132 10.2854 4.66132 10.4591 5.06385L11.6302 7.77777C11.6539 7.83261 11.706 7.86982 11.7655 7.87442L14.765 8.10619C15.2135 8.14085 15.3917 8.70388 15.0448 8.99028L12.7781 10.8618C12.7303 10.9012 12.7095 10.9644 12.7243 11.0245L13.4225 13.8458C13.5289 14.2757 13.0652 14.6214 12.6835 14.3968L10.0816 12.865Z"
+                      fill="white"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="ratingGradient"
+                        x1="10"
+                        y1="1"
+                        x2="10"
+                        y2="19"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop stopColor="#f94e30" />
+                        <stop offset="1" stopColor="#f94e30" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* Rating Number */}
+                  <span className="text-xs font-semibold">{item.rating}</span>
                 </div>
               </div>
               <div className="p-4 flex items-center justify-between">
                 <h2 className="text-base font-semibold text-gray-800 truncate">
                   {item.title}
                 </h2>
-                <p className="text-[#f94e30] font-semibold text-sm">${item.price}</p>
+                <p className="text-[#f94e30] font-semibold text-sm">
+                  ${item.price}
+                </p>
               </div>
             </div>
           ))
