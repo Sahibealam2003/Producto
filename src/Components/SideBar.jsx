@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSideBarOff } from '../Utils/sideBarSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
+  const navigate = useNavigate()
   const { isSideBarOn } = useSelector((store) => store.sidebar);
   const dispatch = useDispatch();
+  const[categoriesData,setCategoriesData] =useState("")
+
+
+  useEffect(()=>{
+    async function getData(){
+      const res= await fetch("https://dummyjson.com/products/categories")
+      const data= await res.json()
+      setCategoriesData(data)
+      
+    }
+    getData()
+  },[])
 
   return (
     <aside
@@ -29,23 +43,33 @@ const SideBar = () => {
 
         {/* Category List */}
         <ul className="overflow-y-scroll h-[calc(100vh-60px)] pr-2 custom-scroll">
+
+        {
+          categoriesData  && categoriesData.map((item)=>{
+            console.log(item);
+            
+            return(
+                  <li 
+                  onClick={()=>{
+                    dispatch(setSideBarOff())
+                  navigate(`/categories/${item.slug}`)
+                  }
+                  
+                  }
+                  key={item.slug} className="py-3 pr-4 border-b border-black/10">
+            <Link
+              
+              className="text-[14px] cur font-[Manrope] tracking-wide transition-all hover:text-[#f94e30] hover:ml-2"
+            >
+              {item.name}
+            </Link>
+          </li>
+            )
+          })
+        }
           {/* Example List Items: Replace or map from data */}
-          <li className="py-3 pr-4 border-b border-black/10">
-            <a
-              href="#"
-              className="text-[14px] font-[Manrope] tracking-wide transition-all hover:text-[#f94e30] hover:ml-2"
-            >
-              Category One
-            </a>
-          </li>
-          <li className="py-3 pr-4 border-b border-black/10">
-            <a
-              href="#"
-              className="text-[14px] font-[Manrope] tracking-wide transition-all hover:text-[#f94e30] hover:ml-2"
-            >
-              Category Two
-            </a>
-          </li>
+        
+
           {/* ... add more list items as needed */}
         </ul>
       </div>

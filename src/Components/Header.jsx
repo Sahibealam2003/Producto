@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 
-const Header = () => {
+const Header = ({ query, setQuery }) => {
   return (
     <header className="bg-gradient-to-b p-2 from-[#f94e30] to-[#ff6433] text-white">
       <div className="container mx-auto">
@@ -66,7 +66,7 @@ const Header = () => {
 
           {/* NavBar */}
           <div>
-            <NavBar />
+            <NavBar query={query} setQuery={setQuery} />
           </div>
         </div>
       </div>
