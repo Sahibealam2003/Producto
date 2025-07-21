@@ -13,7 +13,7 @@ const SearchPage = () => {
   );
 
   return (
-    <div className="px-6 py-4">
+    <div className="border border-white px-6 py-4">
       <h1 className="text-xl font-semibold mb-4">
         Search Results for:{" "}
         <span className="text-[#f94e30]">"{query || "..."}"</span>
@@ -32,7 +32,7 @@ const SearchPage = () => {
                   alt={item.title}
                   className="w-full h-48 object-cover rounded-xl"
                 />
-                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                <div className="absolute top-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
                   {item.discountPercentage}% OFF
                 </div>
               </div>

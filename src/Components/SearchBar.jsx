@@ -2,12 +2,14 @@ import React from "react";
 
 const SearchBar = ({ query, setQuery }) => {
   return (
-    <div className="bg-white px-4 py-1 ml-8 rounded shadow-md hidden sm:flex flex-grow w-[100%]">
+    // 🔹 SearchBar visible only on sm (640px) and up
+    <div className="hidden sm:flex items-center bg-white rounded shadow-md w-full max-w-2xl mx-auto px-3 py-1">
+      {/* 🔸 Search Input Field */}
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         type="text"
-        className="w-[40vw] h-10 text-[14px] text-black/80 px-4 outline-none placeholder:text-[13.5px] placeholder:tracking-wide"
+        className="w-full h-10 text-sm text-black/80 px-4 outline-none placeholder:text-sm placeholder:tracking-wide rounded"
         placeholder="Search your preferred items here"
       />
     </div>

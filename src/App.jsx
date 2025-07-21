@@ -13,7 +13,7 @@ const App = () => {
   const [query, setQuery] = useState("");
 
   return (
-    <div>
+    <div className="bg-gray-50" >
       {/* Header ke andar NavBar already ho to yahan NavBar mat lagao */}
       <Header query={query} setQuery={setQuery} />
       <SideBar />
