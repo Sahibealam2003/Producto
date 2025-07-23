@@ -18,7 +18,7 @@ const NavBar = ({ query, setQuery }) => {
           <button
             onClick={() => dispatch(setSideBarOn())}
             type="button"
-            className="text-white text-xl hover:opacity-90 hover:scale-105 transition duration-200"
+            className="text-white  cursor-pointer text-xl hover:opacity-90 hover:scale-105 transition duration-200"
           >
             <i className="fas fa-bars"></i>
           </button>
