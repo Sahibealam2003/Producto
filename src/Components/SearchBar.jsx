@@ -2,9 +2,9 @@ import React from "react";
 
 const SearchBar = ({ query, setQuery }) => {
   return (
-    // 🔹 SearchBar visible only on sm (640px) and up
+    //  SearchBar
     <div className="hidden sm:flex items-center bg-white rounded shadow-md w-full max-w-2xl mx-auto px-3 py-1">
-      {/* 🔸 Search Input Field */}
+      
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}

@@ -10,7 +10,7 @@ const ProductSinglePage = () => {
 
   console.log(apiData);
 
-  // Ensure product is found safely
+ 
   const findData = apiData.find((item) => item.id == id);
 
   if (!findData)
@@ -184,7 +184,7 @@ const ProductSinglePage = () => {
           )}
         </div>
 
-        {/* Add Comment CTA */}
+        
         <div className="mt-6 text-center">
           <p className="text-lg font-medium text-gray-800 mb-2">
             Want to share your experience?

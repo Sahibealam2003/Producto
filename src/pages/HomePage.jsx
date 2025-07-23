@@ -7,17 +7,17 @@ const HomePage = ({ query }) => {
   const navigate = useNavigate();
   const { apiData } = useApi();
 
-  // Convert search query to lowercase for case-insensitive comparison
+  
   const searchText = query.toLowerCase();
 
-  // Filter data based on title match with searchText
+  // Filter data 
   const filteredData = apiData.filter((item) =>
     item.title.toLowerCase().includes(searchText)
   );
 
   return (
     <>
-      {/* Product Grid Section */}
+      {/* Product Section */}
       <div className="w-[90%] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-8">
         {filteredData.length === 0 ? (
           // Show message if no matching product found
@@ -25,14 +25,14 @@ const HomePage = ({ query }) => {
             No products found for "{query}"
           </p>
         ) : (
-          // Render filtered products
+         
           filteredData.map((item) => (
             <div
               key={item.id}
               onClick={() => navigate(`/product/${item.id}`)}
               className="cursor-pointer transition-transform duration-300 hover:scale-105 bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100"
             >
-              {/* Product Image + Discount + Rating */}
+              {/* Product Image , Discount , Rating */}
               <div className="relative">
                 <img
                   src={item.thumbnail}
@@ -40,7 +40,7 @@ const HomePage = ({ query }) => {
                   className="w-full h-48 object-fill rounded-t-2xl"
                 />
 
-                {/* Discount Label */}
+                {/* Discount */}
                 <p className="absolute top-2 left-3 bg-black text-white text-xs font-semibold px-2 py-1 rounded">
                   {Math.round(item.discountPercentage)}% OFF
                 </p>
@@ -77,7 +77,7 @@ const HomePage = ({ query }) => {
                 </div>
               </div>
 
-              {/* Product Title + Price */}
+              {/* Product Title , Price */}
               <div className="p-4 flex items-center justify-between">
                 <h2 className="text-base font-semibold text-gray-800 truncate w-[70%]">
                   {item.title}

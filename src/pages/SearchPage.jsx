@@ -7,7 +7,7 @@ const SearchPage = () => {
   const query = new URLSearchParams(search).get("q");
   const { apiData } = useApi();
 
-  // Filter products by title using query
+  // Filter products
   const filteredProducts = apiData?.filter((item) =>
     item.title.toLowerCase().includes(query?.toLowerCase())
   );

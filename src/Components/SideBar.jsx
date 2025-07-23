@@ -9,7 +9,7 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const [categoriesData, setCategoriesData] = useState([]);
 
-  // Fetch category list from API on mount
+  // Fetch category list from API
   useEffect(() => {
     async function getData() {
       const res = await fetch("https://dummyjson.com/products/categories");
@@ -20,7 +20,7 @@ const SideBar = () => {
   }, []);
 
   return (
-    // Sidebar container - responsive for all screen sizes using Tailwind
+    // Sidebar container
     <aside
       className={`fixed top-0 left-0 w-[260px] sm:w-[300px] h-screen bg-white shadow-md px-6 py-6 sm:px-8 sm:py-8 z-[1000] transition-transform duration-300 ease-in-out ${
         isSideBarOn ? "translate-x-0" : "-translate-x-full"

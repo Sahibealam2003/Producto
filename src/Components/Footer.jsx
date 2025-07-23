@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import App from "../assets/app.png";
 import Play from "../assets/play.png";
 
@@ -25,6 +24,11 @@ const Footer = () => {
                 className="w-[170px] cursor-pointer transition-transform duration-200 hover:scale-105"
               />
             </a>
+
+
+
+
+
             <a target="_blank">
               <img
                 src={App}
