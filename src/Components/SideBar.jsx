@@ -8,16 +8,27 @@ const SideBar = () => {
   const { isSideBarOn } = useSelector((store) => store.sidebar);
   const dispatch = useDispatch();
   const [categoriesData, setCategoriesData] = useState([]);
+   const [error, setError] = useState(null);
 
   // Fetch category list from API
-  useEffect(() => {
+try {
+  
+    useEffect(() => {
     async function getData() {
       const res = await fetch("https://dummyjson.com/products/categories");
+      if(!res) return setError("Failed to load categories.")
       const data = await res.json();
       setCategoriesData(data);
     }
     getData();
   }, []);
+
+} catch (err) {
+
+setError("Failed to load categories.")
+setCategoriesData([]);
+  
+}
 
   return (
     // Sidebar container
@@ -43,7 +54,7 @@ const SideBar = () => {
 
         {/* Scrollable Category List */}
         <ul className="overflow-y-scroll h-[calc(100vh-120px)] pr-2 custom-scroll">
-          {categoriesData.length > 0 &&
+          {categoriesData ? (
             categoriesData.map((item) => (
               <li
                 key={item.slug}
@@ -57,7 +68,11 @@ const SideBar = () => {
                   {item.name}
                 </Link>
               </li>
-            ))}
+            ))
+          ) : <div>
+            {error}
+          </div>
+          }
         </ul>
       </div>
     </aside>
