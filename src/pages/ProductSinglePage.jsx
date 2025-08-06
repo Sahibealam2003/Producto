@@ -2,6 +2,7 @@ import React from "react";
 import { useApi } from "../Utils/ApiContex";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
+import NoProductMessage from "../Components/NoProductMessage";
 
 const ProductSinglePage = () => {
   const navigate = useNavigate();
@@ -13,11 +14,24 @@ const ProductSinglePage = () => {
  
   const findData = apiData.find((item) => item.id == id);
 
-  if (!findData)
-    return <p className="p-6 text-gray-600">Product Not Found</p>;
+  if (!apiData || apiData.length === 0) {
+    return (
+      <div className="flex justify-center items-center mt-[15%]">
+        <p className="text-gray-600 text-lg animate-pulse">Loading product...</p>
+      </div>
+    );
+  }
+
+  // 2. If product not found, show NoProductMessage
+  if (!findData) {
+    return <NoProductMessage />;
+  }
+
 
   return (
     <>
+    
+    <div>
       <div className="w-[85%] justify-center items-center mx-auto  flex p-5  font-sans">
         <div className="w-[50%] md:w-1/2">
           <div className="">
@@ -196,6 +210,7 @@ const ProductSinglePage = () => {
       </div>
 
       <Footer />
+    </div> 
     </>
   );
 };
