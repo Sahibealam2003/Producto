@@ -163,7 +163,7 @@ const HomePage = ({ query }) => {
                       {Math.round(item.discountPercentage)}% OFF
                     </p>
                     <div className="absolute top-2 right-5 flex items-center gap-1 bg-black text-white px-2 py-1 rounded shadow-sm">
-                      <p className="text-xs flex gap-1 items-center font-semibold">
+                      <div className="text-xs flex gap-1 items-center font-semibold">
                         <svg
                           width="15"
                           height="15"
@@ -196,8 +196,8 @@ const HomePage = ({ query }) => {
                           </defs>
                         </svg>
 
-                        <p>{item.rating}</p>
-                      </p>
+                        <p>{item.rating  || 4.1}</p>
+                      </div>
                     </div>
                   </div>
                   <div className="p-4 flex items-center justify-between">
