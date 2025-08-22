@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     },
 
     increaseQty: (state, action) => {
-      const id = action.payload;
+      const id = action.payload.id;
       const it = state.items.find(i => i.id === id);
       if (!it) return;
       it.qty += 1;
@@ -67,5 +67,6 @@ const cartSlice = createSlice({
   }
 });
 
-export const { addItem, removeItem, increaseQty, decreaseQty, clearCart, setCart } = cartSlice.actions;
+export const { addItem, removeItem, increaseQty, decreaseQty, clearCart } = cartSlice.actions;
+
 export default cartSlice.reducer;

@@ -70,7 +70,7 @@ const Header = ({ query, setQuery }) => {
               <li className="hidden md:inline border-l border-white h-4"></li>
 
               <li>
-                <Link to="/" className="hover:underline">
+                <Link to="/register" className="hover:underline">
                   Register
                 </Link>
               </li>
@@ -78,7 +78,7 @@ const Header = ({ query, setQuery }) => {
               <li className="hidden md:inline border-l border-white h-4"></li>
 
               <li>
-                <Link to="/" className="hover:underline">
+                <Link to="/login" className="hover:underline">
                   Log in
                 </Link>
               </li>
