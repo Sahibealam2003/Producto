@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import{ lazy, useState } from "react";
 import {
   HomePage,
   CartPage,
@@ -15,6 +15,12 @@ import Register from "./Components/Register";
 import RegisterSuccess from "./Components/RegisterSuccess";
 import Login from "./Components/Login";
 import SellerCenter from "./Components/SellerCenter";
+import DownloadApp from "./Components/DownloadApp";
+import ThankYouDownload from "./Components/ThankYouDownload";
+import Support from "./Components/Support";
+import AddComment from "./Components/AddComment";
+import OrderList from "./Components/OrderList";
+
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -32,7 +38,12 @@ const App = () => {
         <Route path="/login" element={<Login />} />
       
         <Route path="/seller" element={<SellerCenter />} />
-        <Route path="/download" element={<Document />} />
+        <Route path="/download" element={<DownloadApp/>} />
+        <Route path="/thankyou" element={<ThankYouDownload/>} />
+        <Route path="/support" element={<Support/>} />
+        <Route path="/order-list" element={<OrderList/>} />
+        <Route path="/addcomment/:id" element={<AddComment/>} />
+        
         
 
         <Route path="/search" element={<SearchBar query={query} setQuery={setQuery} />} />

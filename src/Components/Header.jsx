@@ -1,15 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const Header = ({ query, setQuery }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const nav = useNavigate();
+
+useEffect(() => {
+  const checkLogin = () => {
+    let loginStatus = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loginStatus === "true");
+  };
+
+  checkLogin();
+
+  // 👇 event listener lagao
+  window.addEventListener("loginStatusChanged", checkLogin);
+
+  return () => {
+    window.removeEventListener("loginStatusChanged", checkLogin);
+  };
+}, []);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn"); // login flag hata do
+    setIsLoggedIn(false); // UI update
+    nav("/login"); // logout ke baad login page pe bhej do
+  };
+
   return (
     <header className="bg-black text-white p-2">
       <div className="container mx-auto px-4">
-        {/* Top Bar Section */}
+        {/* Top Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-600 py-2 text-sm">
-          
-          {/*  Left Section  */}
+          {/* Left */}
           <div className="mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">
             <ul className="flex flex-wrap justify-center md:justify-start items-center text-white gap-2 md:gap-3">
               <li>
@@ -17,18 +42,13 @@ const Header = ({ query, setQuery }) => {
                   Seller Center
                 </Link>
               </li>
-
               <li className="hidden md:inline border-l border-white h-4"></li>
-
               <li>
                 <Link to="/download" className="hover:underline">
                   Download
                 </Link>
               </li>
-
               <li className="hidden md:inline border-l border-white h-4"></li>
-
-              {/* Social Icons */}
               <li className="flex items-center gap-2">
                 <span>Follow us on</span>
                 <ul className="flex items-center gap-2">
@@ -57,11 +77,14 @@ const Header = ({ query, setQuery }) => {
             </ul>
           </div>
 
-          {/* Right Section - Support, Register, Login */}
+          {/* Right */}
           <div className="w-full md:w-auto text-center md:text-right">
             <ul className="flex flex-wrap justify-center md:justify-end items-center gap-2 md:gap-3">
               <li>
-                <Link to="/" className="flex items-center gap-1 hover:underline">
+                <Link
+                  to="/support"
+                  className="flex items-center gap-1 hover:underline"
+                >
                   <i className="fa-solid fa-circle-question text-base" />
                   <span>Support</span>
                 </Link>
@@ -69,24 +92,35 @@ const Header = ({ query, setQuery }) => {
 
               <li className="hidden md:inline border-l border-white h-4"></li>
 
-              <li>
-                <Link to="/register" className="hover:underline">
-                  Register
-                </Link>
-              </li>
-
-              <li className="hidden md:inline border-l border-white h-4"></li>
-
-              <li>
-                <Link to="/login" className="hover:underline">
-                  Log in
-                </Link>
-              </li>
+              {!isLoggedIn ? (
+                <>
+                  <li>
+                    <Link to="/register" className="hover:underline">
+                      Register
+                    </Link>
+                  </li>
+                  <li className="hidden md:inline border-l border-white h-4"></li>
+                  <li>
+                    <Link to="/login" className="hover:underline">
+                      Log in
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="hover:underline text-red-400"
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
-        {/*  Main Navigation Bar */}
+        {/* Main Navbar */}
         <div className="mt-2">
           <NavBar query={query} setQuery={setQuery} />
         </div>

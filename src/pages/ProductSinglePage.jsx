@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import ImageLoader from "../Components/ImageLoader";
 
 const ProductSinglePage = () => {
+  const nav = useNavigate();
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -23,8 +24,10 @@ const ProductSinglePage = () => {
   const cartData = useSelector((store) => store.cart);
   const cartItem = cartData.items.find((item) => item.id === productId);
 
+  // Find product from apiData by id
   const findData = apiData.find((item) => item.id === productId);
 
+  // Show loading when apiData not ready
   if (!apiData || apiData.length === 0) {
     return (
       <div className="flex justify-center items-center mt-[15%]">
@@ -35,10 +38,12 @@ const ProductSinglePage = () => {
     );
   }
 
+  // Show message if product not found
   if (!findData) {
     return <NoProductMessage />;
   }
 
+  // Function for adding product to cart
   const handleAddToCart = () => {
     if (findData.stock <= 0) {
       alert("Out of stock");
@@ -74,7 +79,7 @@ const ProductSinglePage = () => {
               <img
                 src={findData.thumbnail}
                 alt={findData.title}
-                onLoad={() => setLoading(false)}
+                onLoad={() => setLoading(false)} // hide loader after image load
                 className={`w-full h-[280px] object-contain p-3 transition-opacity duration-500 ${
                   loading ? "opacity-0" : "opacity-100"
                 }`}
@@ -85,7 +90,7 @@ const ProductSinglePage = () => {
             </div>
           </div>
 
-          {/* Product Details */}
+          {/* Product Details Section */}
           <div className="w-full md:w-1/2 space-y-5">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
               {findData.title}
@@ -94,6 +99,7 @@ const ProductSinglePage = () => {
               </span>
             </h1>
 
+            {/* Price and Discount */}
             <div className="flex items-center gap-4 flex-wrap">
               <span className="text-2xl font-bold text-gray-800">
                 ₹{findData.price}
@@ -103,10 +109,12 @@ const ProductSinglePage = () => {
               </span>
             </div>
 
+            {/* Description */}
             <p className="text-gray-700 text-base leading-relaxed">
               {findData.description}
             </p>
 
+            {/* Shipping and Return info */}
             <div className="text-sm text-gray-600 space-y-1">
               <p>
                 <span className="font-semibold">Shipping:</span>{" "}
@@ -118,6 +126,7 @@ const ProductSinglePage = () => {
               </p>
             </div>
 
+            {/* Stock check */}
             <div>
               {findData.stock > 0 ? (
                 <p className="text-green-600 font-semibold">
@@ -128,24 +137,26 @@ const ProductSinglePage = () => {
               )}
             </div>
 
+            {/* Rating */}
             <div className="flex items-center gap-2">
               <span className="font-semibold">Rating:</span>
               <p className="text-sm text-gray-700">{findData.rating} / 5</p>
             </div>
 
-            {/* Add to Cart */}
+            {/* Add to Cart Section */}
             <div
               onClick={handleAddToCart}
               className="font-semibold w-full cursor-pointer bg-black hover:bg-gray-900 transform hover:scale-105 text-white  shadow-md py-3 text-center transition duration-300 ease-in-out"
             >
               {cartItem ? (
+                // If product already in cart then show qty buttons
                 <div className="flex items-center gap-3 justify-center">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       dispatch(decreaseQty(productId));
                     }}
-                    className="px-3 py-1 border rounded-md hover:bg-gray-100"
+                    className="px-3 py-1 border rounded-md cursor-pointer hover:bg-gray-700"
                   >
                     -
                   </button>
@@ -155,7 +166,7 @@ const ProductSinglePage = () => {
                       e.stopPropagation();
                       dispatch(increaseQty({ id: productId }));
                     }}
-                    className="px-3 py-1 border rounded-md hover:bg-gray-100"
+                    className="px-3 py-1 border rounded-md cursor-pointer hover:bg-gray-700"
                   >
                     +
                   </button>
@@ -173,6 +184,7 @@ const ProductSinglePage = () => {
             ⭐ Customer Reviews
           </h1>
 
+          {/* Show reviews if available */}
           <div className="space-y-4">
             {findData.reviews && findData.reviews.length > 0 ? (
               findData.reviews.map((item, index) => (
@@ -202,11 +214,15 @@ const ProductSinglePage = () => {
             )}
           </div>
 
+          {/* Add comment button */}
           <div className="mt-6 text-center">
             <p className="text-base md:text-lg font-medium text-gray-800 mb-3">
               Want to share your experience?
             </p>
-            <button className="bg-black text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:bg-gray-900 transform hover:scale-105 transition duration-300 text-sm md:text-base">
+            <button
+              onClick={() => nav("/addcomment/" + id)}
+              className="bg-black cursor-pointer text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:bg-gray-900 transform hover:scale-105 transition duration-300 text-sm md:text-base"
+            >
               + Add a Comment
             </button>
           </div>

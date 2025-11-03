@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // 👈 Link import kiya
 
 const Login = () => {
-    const nav= useNavigate()
+  const nav = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,17 +14,25 @@ const Login = () => {
       return;
     }
 
-    
-    if (username === "admin" && password === "1234") {
-      toast.success("Login Successful!");
-      nav('/')
+    const userData = JSON.parse(localStorage.getItem("user"));
+
+    const findUser = userData?.find(
+      (item) => item.username === username && item.password === password
+    );
+
+    if (findUser) {
+      toast.success("Login Successfully");
+      localStorage.setItem("isLoggedIn", true);
+      window.dispatchEvent(new Event("loginStatusChanged")); // 👈 event trigger
+      nav("/");
     } else {
-      toast.error("Invalid username or password!");
+      toast.error("Invalid Credential or User not found");
+      return;
     }
   };
 
   return (
-    <div className="flex justify-center items-center mt-10 ">
+    <div className="flex justify-center items-center mt-10">
       <div className="bg-white shadow-lg rounded-2xl px-8 py-10 w-[90%] max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login
@@ -48,10 +57,21 @@ const Login = () => {
 
           <button
             onClick={handleLogin}
-            className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition transform hover:scale-105"
+            className="w-full cursor-pointer bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition transform hover:scale-105"
           >
             Login
           </button>
+
+          {/* 👇 Signup Link added */}
+          <p className="text-center text-gray-600 text-sm mt-3">
+            Don’t have an account?{" "}
+            <Link
+              to="/register"
+              className="text-black font-semibold hover:underline"
+            >
+              Signup
+            </Link>
+          </p>
         </div>
       </div>
     </div>
