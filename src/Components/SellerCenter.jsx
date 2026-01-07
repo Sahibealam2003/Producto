@@ -21,19 +21,19 @@ const SellerCenter = () => {
       id: 1,
       title: "Wireless Headphones",
       price: 2499,
-      thumbnail: "https://shorturl.at/Vcoas",
+      thumbnail: "https://shopatsc.com/cdn/shop/products/CH520_1000x1000_Black_G_1024x1024@2x.jpg?v=1681194265",
     },
     {
       id: 2,
       title: "Smart Watch",
       price: 3999,
-      thumbnail: "https://shorturl.at/08v6Y",
+      thumbnail: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS0V_2wqFWoEuFPCySCzvTyVIR7mP931DxC6mt2K-BEtNoG2GWaFO-GLgAV0L1cW4tEx51e-4-EiHyALt2TkDmQ3GcueFElw9vf__LjdCOOTtwXG1_ew2AXig",
     },
     {
       id: 3,
       title: "Gaming Laptop",
       price: 75999,
-      thumbnail: "https://shorturl.at/4FrC6",
+      thumbnail: "https://media.wired.com/photos/6843d25f93d1ae9631e55a37/1:1/w_800,h_800,c_limit/Best%20gaming%20laptops%202025%20update_.png",
     },
   ]);
 
@@ -73,7 +73,7 @@ const SellerCenter = () => {
               <img
                 src={product.thumbnail}
                 alt={product.title}
-                className="w-full h-40 object-cover rounded-lg mb-4"
+                className="w-full h-60 object-fill rounded-lg mb-4"
               />
              
               <h3 className="font-semibold text-lg">{product.title}</h3>
@@ -91,7 +91,7 @@ const SellerCenter = () => {
       <div className="flex justify-center mt-6">
         <button
           onClick={() => navigate("/")}
-          className="bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition transform hover:scale-105"
+          className="bg-black cursor-pointer text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition transform hover:scale-105"
         >
           Back to Home
         </button>
