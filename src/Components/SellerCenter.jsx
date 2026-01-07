@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SellerCenter = () => {
   const navigate = useNavigate();
 
-  // Seller / Company basic information
+  
   const sellerInfo = {
     name: "PRODUCTO.",
     tagline: "Trusted Marketplace for Quality Products",
@@ -15,7 +15,7 @@ const SellerCenter = () => {
       "PRODUCTO connects buyers with quality products. We focus on customer satisfaction, reliable service, and affordable pricing. Explore our diverse product catalog below.",
   };
 
-  // List of sample products shown in seller center
+
   const [products] = useState([
     {
       id: 1,
@@ -39,7 +39,7 @@ const SellerCenter = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      {/* Seller details block */}
+     
       <div className="bg-white shadow-md rounded-2xl p-6 mb-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           {sellerInfo.name}
@@ -60,7 +60,7 @@ const SellerCenter = () => {
         </div>
       </div>
 
-      {/* Products listing block */}
+    
       <div className="bg-white shadow-md rounded-2xl p-6 mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -69,16 +69,16 @@ const SellerCenter = () => {
               key={product.id}
               className="border rounded-xl p-4 shadow hover:shadow-lg transition"
             >
-              {/* Product image */}
+              
               <img
                 src={product.thumbnail}
                 alt={product.title}
                 className="w-full h-40 object-cover rounded-lg mb-4"
               />
-              {/* Product title + price */}
+             
               <h3 className="font-semibold text-lg">{product.title}</h3>
               <p className="text-gray-600">₹ {product.price}</p>
-              {/* CTA button for product */}
+              
               <button className="mt-3 w-full bg-black text-white py-2 rounded-lg hover:bg-gray-900 transition">
                 View Details
               </button>
@@ -87,7 +87,7 @@ const SellerCenter = () => {
         </div>
       </div>
 
-      {/* Back to Home Button */}
+    
       <div className="flex justify-center mt-6">
         <button
           onClick={() => navigate("/")}

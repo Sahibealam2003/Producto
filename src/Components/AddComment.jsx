@@ -3,20 +3,20 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddComment = () => {
-  // form states
+  //  states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
-  // get product id from URL & navigation hook
+
   const { id } = useParams();
   const nav = useNavigate();
 
-  // handle custom submit
+  // custom submit
   const handleSubmit = () => {
-    // simple validation for empty fields
+  
     if (!name || !email || !comment) {
       toast.error("Please fill in all fields ❌");
       return;
@@ -24,7 +24,7 @@ const AddComment = () => {
 
     setSubmitted(true);
 
-    // reset form after submission
+    
     setName("");
     setEmail("");
     setComment("");
@@ -32,7 +32,7 @@ const AddComment = () => {
 
     toast.success("Comment added Successfully 😊");
 
-    // redirect to product page
+    
     nav("/product/" + id);
   };
 
@@ -40,7 +40,7 @@ const AddComment = () => {
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl p-6 mt-6">
       <h2 className="text-2xl  font-bold text-gray-800 mb-4">Add a Comment</h2>
 
-      {/* success message after submission */}
+      
       {submitted && (
         <p className="text-green-600 mb-4">
           ✅ Comment submitted successfully!
@@ -93,7 +93,7 @@ const AddComment = () => {
           ))}
         </div>
 
-        {/* Custom Submit Button */}
+        
         <button
           onClick={handleSubmit}
           className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"

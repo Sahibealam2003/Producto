@@ -5,7 +5,7 @@ const ThankYouDownload = () => {
   return (
     <div className="flex items-center justify-center mt-10">
       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-xl text-center">
-        {/* Thank You Heading */}
+       
         <h1 className="text-4xl font-extrabold text-gray-800 mb-4">
           🎉 Thank You!
         </h1>
@@ -14,12 +14,12 @@ const ThankYouDownload = () => {
           Start shopping smarter, faster, and easier today!
         </p>
 
-        {/* Success Icon */}
+    
         <div className="flex justify-center mb-6">
           <i className="fa-solid fa-circle-check text-green-500 text-6xl"></i>
         </div>
 
-        {/* CTA Buttons */}
+       
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/"

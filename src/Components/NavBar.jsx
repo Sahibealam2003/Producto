@@ -8,15 +8,12 @@ const NavBar = ({ query, setQuery }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // 🛒 Redux se cart ke total items la raha hai
   const totalQuantity = useSelector((store) => store.cart.totalQuantity);
 
   return (
     <nav className="px-3 py-2 bg-black text-white">
       <div className="flex flex-wrap items-center justify-between gap-4">
-
         <div className="flex items-center gap-4">
-          {/* ☰ Sidebar open karne ka button */}
           <button
             onClick={() => dispatch(setSideBarOn())}
             type="button"
@@ -25,7 +22,6 @@ const NavBar = ({ query, setQuery }) => {
             <i className="fas fa-bars"></i>
           </button>
 
-          {/* Logo, click karne par homepage pe le jata hai aur search query reset hoti hai */}
           <div
             onClick={() => {
               navigate("/");
@@ -40,14 +36,12 @@ const NavBar = ({ query, setQuery }) => {
           </div>
         </div>
 
-        {/* Cart icon jaha total items count dikh raha hai */}
         <div
           className="relative text-[1.8rem] cursor-pointer hover:scale-105 transition duration-200"
           onClick={() => navigate("/product/cart")}
         >
           <i className="fa-solid fa-cart-shopping"></i>
 
-          {/* Agar cart me items hai toh number badge dikhega */}
           {totalQuantity > 0 && (
             <div className="absolute -top-2 -right-2 bg-white text-black text-xs font-semibold w-[20px] h-[20px] rounded-full flex items-center justify-center">
               {totalQuantity}

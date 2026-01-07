@@ -6,13 +6,13 @@ import { PropagateLoader } from "react-spinners";
 import ProductCard from "../Components/ProductCard";
 
 const HomePage = ({ query }) => {
-  // states for sorting
+ 
   const [priceSort, setPriceSort] = useState("");
   const [ratingSort, setRatingSort] = useState("");
   const [showSortData, setShowSortData] = useState(false);
 
   const navigate = useNavigate();
-  const { apiData } = useApi(); // custom hook se product data aa raha hai
+  const { apiData } = useApi(); 
 
   // search filter
   const searchText = query.toLowerCase();
@@ -22,11 +22,11 @@ const HomePage = ({ query }) => {
 
   let sortData = [...filteredData];
 
-  // price sort logic
+  // price sort 
   if (priceSort === "low") sortData.sort((a, b) => a.price - b.price);
   else if (priceSort === "high") sortData.sort((a, b) => b.price - a.price);
 
-  // rating sort logic
+  // rating sort 
   if (ratingSort === "low") sortData.sort((a, b) => a.rating - b.rating);
   else if (ratingSort === "high") sortData.sort((a, b) => b.rating - a.rating);
 
@@ -46,7 +46,7 @@ const HomePage = ({ query }) => {
 
   return (
     <>
-      {/* loader jab tak data nahi aata */}
+    
       {apiData.length === 0 ? (
         <div className="flex items-center justify-center h-[50vh] w-full bg-white">
           <PropagateLoader
@@ -58,9 +58,9 @@ const HomePage = ({ query }) => {
         </div>
       ) : (
         <div className="bg-gray-100 pt-5">
-          {/* top search and filter bar */}
+        
           <div className="relative w-[90%] max-w-4xl mx-auto flex items-center gap-4 border border-gray-300 rounded-lg px-4 py-2 shadow-sm">
-            {/* filter button */}
+           
             <div
               onClick={() => setShowSortData(!showSortData)}
               className="flex items-center gap-2 cursor-pointer px-2 py-1.5 border border-gray-300 rounded-md hover:bg-gray-100 transition"
@@ -68,7 +68,7 @@ const HomePage = ({ query }) => {
               <p className="text-sm font-medium text-gray-700">Filter</p>
             </div>
 
-            {/* search box (sirf redirect karta hai search page pe) */}
+            
             <div className="flex-1">
               <input
                 readOnly
@@ -78,7 +78,7 @@ const HomePage = ({ query }) => {
               />
             </div>
 
-            {/* filter dropdown */}
+           
             {showSortData && (
               <div className="absolute top-[109%] w-[40%] left-[2%] bg-gray-200 border border-gray-300 rounded-lg shadow-md p-4 z-10">
                 <div className="mb-4">
@@ -128,7 +128,7 @@ const HomePage = ({ query }) => {
                     </label>
                   </div>
                 </div>
-                {/* close dropdown button */}
+            
                 <div className="flex justify-end underline text-xs">
                   <p
                     onClick={() => setShowSortData(false)}
@@ -140,8 +140,6 @@ const HomePage = ({ query }) => {
               </div>
             )}
           </div>
-
-          {/* product list grid */}
           <div className="w-[85%] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto grid gap-6 py-5">
             {filteredData.length <= 0 ? (
               <p className="text-center text-gray-500 font-medium col-span-full">

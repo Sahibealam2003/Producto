@@ -10,7 +10,7 @@ const SideBar = () => {
   const [categoriesData, setCategoriesData] = useState([]);
    const [error, setError] = useState(null);
 
-  // Fetch category list from API
+
 try {
   
     useEffect(() => {
@@ -31,13 +31,13 @@ setCategoriesData([]);
 }
 
   return (
-    // Sidebar container
+
     <aside
       className={`fixed top-0 left-0 w-[260px] sm:w-[300px] h-screen bg-white shadow-md px-6 py-6 sm:px-8 sm:py-8 z-[1000] transition-transform duration-300 ease-in-out ${
         isSideBarOn ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      {/* Close button in top-right corner */}
+      
       <button
         type="button"
         className="absolute right-6 top-6 sm:right-8 sm:top-8 text-xl cursor-pointer transition-colors duration-300 hover:text-gray-500"
@@ -46,13 +46,13 @@ setCategoriesData([]);
         <i className="fas fa-times"></i>
       </button>
 
-      {/* Sidebar Heading */}
+    
       <div className="mt-8 sm:mt-10">
         <div className="pb-4 text-[16px] sm:text-[17px] uppercase font-semibold tracking-wide">
           All Categories
         </div>
 
-        {/* Scrollable Category List */}
+
         <ul className="overflow-y-scroll h-[calc(100vh-120px)] pr-2 custom-scroll">
           {categoriesData ? (
             categoriesData.map((item) => (

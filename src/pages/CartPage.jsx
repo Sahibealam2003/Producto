@@ -4,12 +4,12 @@ import { increaseQty, decreaseQty, removeItem, clearCart } from "../Utils/cartSl
 import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
-  const cart = useSelector((s) => s.cart); // get cart state from redux
-  const dispatch = useDispatch(); // dispatch actions to redux
-  const navigate = useNavigate(); // navigation hook
-  console.log(cart);
+  const cart = useSelector((s) => s.cart); 
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
 
-  // if cart is empty, show message with back button
+
+
   if (!cart || cart.items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
@@ -32,14 +32,14 @@ const CartPage = () => {
         Your Shopping Cart
       </h1>
 
-      {/* list of cart items */}
+      
       <div className="space-y-4">
         {cart.items.map((item) => (
           <div
             key={item.id}
             className="flex flex-col sm:flex-row justify-between items-center gap-4 border rounded-xl p-4 shadow-sm hover:shadow-md transition"
           >
-            {/* product details */}
+            
             <div className="flex items-center gap-4 w-full sm:w-auto">
               <img
                 src={item.thumbnail}
@@ -56,7 +56,7 @@ const CartPage = () => {
               </div>
             </div>
 
-            {/* qty controls */}
+            
             <div className="flex items-center gap-2">
               <button
                 onClick={() => dispatch(decreaseQty({ id: Number(item.id) }))}
@@ -82,7 +82,7 @@ const CartPage = () => {
         ))}
       </div>
 
-      {/* cart summary section */}
+      
       <div className="border-t pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1">
           <p className="font-semibold text-gray-800 text-base md:text-lg">
@@ -93,7 +93,7 @@ const CartPage = () => {
           </p>
         </div>
 
-        {/* action buttons */}
+        
         <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => dispatch(clearCart())}
@@ -102,7 +102,11 @@ const CartPage = () => {
             Clear Cart
           </button>
           <button
-            onClick={() => navigate("/order-list")}
+          
+            onClick={() => {
+              navigate("/checkout")
+              dispatch(clearCart())
+            }}
             className="bg-black cursor-pointer text-white px-5 py-2 rounded hover:bg-gray-900 transition duration-200 shadow-md text-sm md:text-base"
           >
             Proceed to Checkout →

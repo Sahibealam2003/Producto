@@ -5,28 +5,24 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const nav = useNavigate();
 
-  // form states with default values for testing
-  const [name, setName] = useState("alam");
-  const [email, setEmail] = useState("alam@gmail.com");
-  const [username, setUsername] = useState("alamsaifi");
-  const [password, setPassword] = useState("Alam9719#");
-  const [number, setNumber] = useState("1234567892");
+  //states
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [number, setNumber] = useState("");
 
-  // function to handle register button click
+  //handle register
   const handleRegister = () => {
-    // validation for empty fields
     if (!name || !email || !username || !password || !number) {
       toast.error("All fields are required!");
       return;
     }
 
-    // user object to be saved
     const data = { name, email, username, password, number };
 
-    // get existing users from localStorage
     let existUser = JSON.parse(localStorage.getItem("user")) || [];
 
-    // check if username, email or number already exists
     const foundUser = existUser.find(
       (item) =>
         item.username === username ||
@@ -38,29 +34,19 @@ const Register = () => {
       return;
     }
 
-    // ensure existUser is always an array
     if (!Array.isArray(existUser)) {
       existUser = [];
     }
 
-    // add new user to array
     existUser.push(data);
 
-    // save updated array back to localStorage
     localStorage.setItem("user", JSON.stringify(existUser));
 
-    // debug logs for verification
-    console.log(existUser);
-    console.log(data);
-
-    // success message
     toast.success("Registered Successfully!");
-    // redirect to another page after success if needed
     nav("/registersuccess");
   };
 
   return (
-    // wrapper to center the form
     <div className="flex justify-center items-center">
       <div className="bg-white shadow-lg rounded-2xl px-8 py-4 w-[90%] max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">

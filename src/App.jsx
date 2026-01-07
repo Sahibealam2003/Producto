@@ -1,61 +1,47 @@
-import{ lazy, useState } from "react";
-import {
-  HomePage,
-  CartPage,
-  ProductSinglePage,
-  CategoryProduct,
-} from "./pages/pages";
-import Header from "./Components/Header";
-import SideBar from "./Components/SideBar";
-import { Route, Routes } from "react-router-dom";
-import SearchBar from "./Components/SearchBar";
+import { lazy, Suspense, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Checkout from "./Components/Checkout";
-import Register from "./Components/Register";
-import RegisterSuccess from "./Components/RegisterSuccess";
-import Login from "./Components/Login";
-import SellerCenter from "./Components/SellerCenter";
-import DownloadApp from "./Components/DownloadApp";
-import ThankYouDownload from "./Components/ThankYouDownload";
-import Support from "./Components/Support";
-import AddComment from "./Components/AddComment";
-import OrderList from "./Components/OrderList";
+import { PropagateLoader } from "react-spinners";
 
+const HomePage = lazy(() => import("./pages/HomePage"));
+const CartPage = lazy(() => import("./pages/CartPage"));
+const ProductSinglePage = lazy(() => import("./pages/ProductSinglePage"));
+const CategoryProduct = lazy(() => import("./pages/CategoryProduct"));
+
+const Header = lazy(() => import("./Components/Header"));
+const SideBar = lazy(() => import("./Components/SideBar"));
+const Checkout = lazy(() => import("./Components/Checkout"));
+const Login = lazy(() => import("./Components/Login"));
 
 const App = () => {
   const [query, setQuery] = useState("");
 
   return (
     <>
-    <Toaster />
-      <Header query={query} setQuery={setQuery} />
-      <SideBar />
+      <Toaster />
+      <Suspense fallback={<div className="flex items-center justify-center h-[50vh] w-full bg-white">
+                <PropagateLoader
+                  color="black"
+                  loading={true}
+                  size={40}
+                  speedMultiplier={1}
+                />
+              </div>}>
+        <Header query={query} setQuery={setQuery} />
+        <SideBar />
 
-      <Routes>
-        <Route path="/" element={<HomePage query={query} />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/registersuccess" element={<RegisterSuccess />} />
-        <Route path="/login" element={<Login />} />
-      
-        <Route path="/seller" element={<SellerCenter />} />
-        <Route path="/download" element={<DownloadApp/>} />
-        <Route path="/thankyou" element={<ThankYouDownload/>} />
-        <Route path="/support" element={<Support/>} />
-        <Route path="/order-list" element={<OrderList/>} />
-        <Route path="/addcomment/:id" element={<AddComment/>} />
-        
-        
-
-        <Route path="/search" element={<SearchBar query={query} setQuery={setQuery} />} />
-        
-        <Route path="/product/:id" element={<ProductSinglePage />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/product/cart" element={<CartPage />} />
-        <Route
-          path="/categories/:text"
-          element={<CategoryProduct query={query} />}
-        />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage query={query} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/product/cart" element={<CartPage />} />
+          <Route path="/product/:id" element={<ProductSinglePage />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/categories/:text"
+            element={<CategoryProduct query={query} />}
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 };

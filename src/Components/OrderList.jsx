@@ -38,12 +38,12 @@ const OrderList = () => {
         ))}
       </ul>
 
-      {/* Order Summary */}
+    
       <div className="mt-6 p-4 border-t font-semibold text-lg">
         <p>Total Items: {totalQuantity}</p>
         <p>Total Amount: ₹{Math.round(totalAmount)}</p>
 
-        {/* Place Order Button */}
+       
         <button
           onClick={() => {
             dispatch(clearCart());

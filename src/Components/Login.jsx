@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate, Link } from "react-router-dom"; // 👈 Link import kiya
+import { useNavigate, Link } from "react-router-dom"; 
 
 const Login = () => {
   const nav = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
     if (findUser) {
       toast.success("Login Successfully");
       localStorage.setItem("isLoggedIn", true);
-      window.dispatchEvent(new Event("loginStatusChanged")); // 👈 event trigger
+      window.dispatchEvent(new Event("loginStatusChanged"));
       nav("/");
     } else {
       toast.error("Invalid Credential or User not found");
@@ -62,7 +62,7 @@ const Login = () => {
             Login
           </button>
 
-          {/* 👇 Signup Link added */}
+
           <p className="text-center text-gray-600 text-sm mt-3">
             Don’t have an account?{" "}
             <Link

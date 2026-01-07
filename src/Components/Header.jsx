@@ -14,7 +14,7 @@ useEffect(() => {
 
   checkLogin();
 
-  // 👇 event listener lagao
+
   window.addEventListener("loginStatusChanged", checkLogin);
 
   return () => {
@@ -24,17 +24,17 @@ useEffect(() => {
 
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn"); // login flag hata do
-    setIsLoggedIn(false); // UI update
-    nav("/login"); // logout ke baad login page pe bhej do
+    localStorage.removeItem("isLoggedIn"); 
+    setIsLoggedIn(false); 
+    nav("/login"); 
   };
 
   return (
     <header className="bg-black text-white p-2">
       <div className="container mx-auto px-4">
-        {/* Top Bar */}
+        
         <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-600 py-2 text-sm">
-          {/* Left */}
+        
           <div className="mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">
             <ul className="flex flex-wrap justify-center md:justify-start items-center text-white gap-2 md:gap-3">
               <li>

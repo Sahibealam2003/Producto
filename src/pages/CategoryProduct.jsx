@@ -4,23 +4,21 @@ import Footer from "../Components/Footer";
 
 const CategoryProduct = ({ query }) => {
   const [catData, setCatData] = useState([]);
-  const { text } = useParams(); // URL se category ka naam nikalna
+  const { text } = useParams();
   const navigate = useNavigate();
 
-  // API call to get category products
   useEffect(() => {
     async function getData() {
       const res = await fetch(
         `https://dummyjson.com/products/category/${text}`
       );
       const categoryData = await res.json();
-      setCatData(categoryData.products); // state me category ka data store karna
+      setCatData(categoryData.products);
     }
 
     getData();
   }, [text]);
 
-  // search bar ke text ke basis pe filter karna
   const searchText = query.toLowerCase();
   const filteredData = catData.filter((item) =>
     item.title.toLowerCase().includes(searchText)
@@ -29,34 +27,28 @@ const CategoryProduct = ({ query }) => {
   return (
     <>
       <div className="px-4 py-6 w-[90%] mx-auto">
-        {/* Category Title */}
         <h1 className="text-2xl font-bold mb-6 capitalize">{text} Products</h1>
 
-        {/* Product Grid */}
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredData &&
             filteredData.map((item) => (
               <div
-                onClick={() => navigate(`/product/${item.id}`)} // product page pe navigate karna
+                onClick={() => navigate(`/product/${item.id}`)}
                 key={item.id}
                 className="cursor-pointer transition transform duration-300 hover:scale-105 bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100"
               >
                 <div className="relative">
-                  {/* Product Image */}
                   <img
                     src={item.thumbnail}
                     alt={item.title}
                     className="w-full h-48 object-fill rounded-t-2xl"
                   />
 
-                  {/* Discount Badge */}
                   <p className="absolute top-2 left-3 bg-black text-white text-xs font-semibold px-2 py-1 rounded">
                     {Math.round(item.discountPercentage)}% OFF
                   </p>
 
-                  {/* Rating Section */}
                   <div className="absolute top-2 right-5 flex items-center gap-1 bg-black text-white px-2 py-1 rounded shadow-sm">
-                    {/* Star Icon */}
                     <svg
                       width="16"
                       height="16"
@@ -89,12 +81,10 @@ const CategoryProduct = ({ query }) => {
                       </defs>
                     </svg>
 
-                    {/* Rating Number */}
                     <span className="text-xs font-semibold">{item.rating}</span>
                   </div>
                 </div>
 
-                {/* Product Info */}
                 <div className="p-4 flex items-center justify-between">
                   <h2 className="text-base font-semibold text-gray-800 truncate w-44">
                     {item.title}
@@ -107,8 +97,6 @@ const CategoryProduct = ({ query }) => {
             ))}
         </div>
       </div>
-
-      {/* Footer */}
       <Footer />
     </>
   );

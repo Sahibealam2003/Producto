@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Support = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6 relative">
-      {/* Back button for navigation */}
+    
       <div className="absolute top-6 left-6">
         <Link
           to="/"
@@ -15,7 +15,7 @@ const Support = () => {
         </Link>
       </div>
 
-      {/* Page header */}
+     
       <div className="text-center max-w-2xl mb-10 mt-12">
         <h1 className="text-4xl font-extrabold text-gray-800 mb-4">
           How can we help you? 🤝
@@ -25,10 +25,9 @@ const Support = () => {
         </p>
       </div>
 
-      {/* Support categories grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl w-full">
         
-        {/* Orders section */}
+     
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-box text-4xl text-blue-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Orders</h2>
@@ -38,7 +37,6 @@ const Support = () => {
           <button className="text-blue-500 hover:underline">Learn More</button>
         </div>
 
-        {/* Payments section */}
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-credit-card text-4xl text-green-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Payments</h2>
@@ -48,7 +46,7 @@ const Support = () => {
           <button className="text-green-500 hover:underline">Learn More</button>
         </div>
 
-        {/* Returns section */}
+     
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-rotate-left text-4xl text-red-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Returns</h2>
@@ -58,7 +56,7 @@ const Support = () => {
           <button className="text-red-500 hover:underline">Learn More</button>
         </div>
 
-        {/* Account section */}
+      
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-user text-4xl text-purple-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Account</h2>
@@ -68,7 +66,7 @@ const Support = () => {
           <button className="text-purple-500 hover:underline">Learn More</button>
         </div>
 
-        {/* Shipping section */}
+  
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-truck text-4xl text-orange-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Shipping</h2>
@@ -78,7 +76,7 @@ const Support = () => {
           <button className="text-orange-500 hover:underline">Learn More</button>
         </div>
 
-        {/* Offers section */}
+      
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-2xl transition">
           <i className="fa-solid fa-tags text-4xl text-pink-500 mb-4"></i>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Offers</h2>
@@ -89,7 +87,7 @@ const Support = () => {
         </div>
       </div>
 
-      {/* Contact support options */}
+    
       <div className="mt-16 text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Still need help?</h2>
         <p className="text-gray-600 mb-6">Our team is available 24/7 to assist you.</p>

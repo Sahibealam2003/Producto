@@ -4,19 +4,19 @@ import SearchSkeleton from "../pages/SearchSkeleton";
 import { useApi } from "../Utils/ApiContex";
 
 const SearchBar = ({ query, setQuery }) => {
-  // sorting ke liye states
+  // sorting
   const [priceSort, setPriceSort] = useState("");
   const [ratingSort, setRatingSort] = useState("");
-  // filter dropdown dikhana/na dikhana
+  // filter dropdown
   const [showSortData, setShowSortData] = useState(false);
-  // result check karne ke liye
+  // result 
   const [resultFound, setResultFound] = useState(false);
   const [result, setResult] = useState([]);
 
   const navigate = useNavigate();
   const { apiData } = useApi();
 
-  // jab bhi query change ho search call hoga
+
   useEffect(() => {
     if (query.trim() === "") {
       setResult([]);
@@ -27,14 +27,14 @@ const SearchBar = ({ query, setQuery }) => {
     setResult([]);
     setResultFound(false);
 
-    // delay ke sath loading skeleton dikhega
+    
     const timer = setTimeout(() => {
       setResultFound(true);
     }, 1000);
 
     const searchData = async () => {
       try {
-        // api se search results la raha hai
+       
         const res = await fetch(
           `https://dummyjson.com/products/search?q=${query}`
         );
@@ -53,7 +53,6 @@ const SearchBar = ({ query, setQuery }) => {
     searchData();
   }, [query]);
 
-  // sorting apply karna
   const sortedResults = [...result];
 
   if (priceSort === "low") sortedResults.sort((a, b) => a.price - b.price);
@@ -62,13 +61,13 @@ const SearchBar = ({ query, setQuery }) => {
   if (ratingSort === "low") sortedResults.sort((a, b) => a.rating - b.rating);
   else if (ratingSort === "high") sortedResults.sort((a, b) => b.rating - a.rating);
 
-  // price sort handle
+  // price sort 
   const handlePriceSort = (order) => {
     setPriceSort(order === priceSort ? "" : order);
     setRatingSort("");
   };
 
-  // rating sort handle
+  // rating sort 
   const handleRatingSort = (order) => {
     setRatingSort(order === ratingSort ? "" : order);
     setPriceSort("");
@@ -76,10 +75,10 @@ const SearchBar = ({ query, setQuery }) => {
 
   return (
     <div className="w-[90%] sm:w-[80%] mx-auto mt-6">
-      {/* search input + filter button */}
+    
       <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
         
-        {/* filter button */}
+     
         <button
           onClick={() => setShowSortData(!showSortData)}
           className="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 shadow-sm transition"
@@ -100,7 +99,7 @@ const SearchBar = ({ query, setQuery }) => {
           </svg>
         </button>
 
-        {/* search box */}
+ 
         <div className="flex-grow w-full sm:w-auto">
           <input
             value={query}
@@ -112,12 +111,12 @@ const SearchBar = ({ query, setQuery }) => {
         </div>
       </div>
 
-      {/* filter dropdown box */}
+   
       {showSortData && (
         <div className="relative mt-4 z-20">
           <div className="absolute w-full max-w-sm bg-white border border-gray-300 rounded-md shadow-lg p-4">
             
-            {/* sort by price */}
+         
             <div className="mb-4">
               <h4 className="text-sm font-semibold text-gray-700 mb-2">Sort by Price</h4>
               <div className="space-y-2">
@@ -144,7 +143,6 @@ const SearchBar = ({ query, setQuery }) => {
 
             <hr className="border-t border-gray-200 my-2" />
 
-            {/* sort by rating */}
             <div>
               <h4 className="text-sm font-semibold text-gray-700 mb-2">Sort by Rating</h4>
               <div className="space-y-2">
@@ -169,7 +167,7 @@ const SearchBar = ({ query, setQuery }) => {
               </div>
             </div>
 
-            {/* close button */}
+        
             <div className="mt-4 text-right">
               <button
                 onClick={() => setShowSortData(false)}
@@ -182,17 +180,17 @@ const SearchBar = ({ query, setQuery }) => {
         </div>
       )}
 
-      {/* results section */}
+  
       {query && (
         <div className="mt-6 space-y-4 max-h-[60vh] overflow-y-auto">
           {sortedResults.length > 0 ? (
             sortedResults.map((item) => (
               <div
                 key={item.id}
-                onClick={() => navigate(`/product/${item.id}`)} // product detail pe navigate karega
+                onClick={() => navigate(`/product/${item.id}`)} 
                 className="flex items-center gap-4 border border-gray-200 rounded-lg p-4 bg-white hover:shadow-md transition cursor-pointer"
               >
-                {/* product image */}
+                
                 <div className="w-20 h-20 rounded overflow-hidden">
                   <img
                     src={item.thumbnail}
@@ -201,7 +199,7 @@ const SearchBar = ({ query, setQuery }) => {
                   />
                 </div>
 
-                {/* product details */}
+                
                 <div className="flex justify-between w-full items-center">
                   <div>
                     <h3 className="text-base font-semibold text-gray-800">
@@ -221,7 +219,7 @@ const SearchBar = ({ query, setQuery }) => {
           ) : resultFound ? (
             <p className="text-center text-sm text-gray-500">No results found</p>
           ) : (
-            <SearchSkeleton /> // loading skeleton jab tak data aa nahi jata
+            <SearchSkeleton /> 
           )}
         </div>
       )}
